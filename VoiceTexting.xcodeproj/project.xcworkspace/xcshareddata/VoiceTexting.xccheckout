@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>82AC1279-F2BE-4D86-AB95-ED684318C490</string>
+	<key>IDESourceControlProjectName</key>
+	<string>VoiceTexting</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6BDCA0AC-67AA-4219-9A76-B25ACA83C10E</key>
+		<string>https://github.com/johnil/VoiceTexting.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>VoiceTexting.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6BDCA0AC-67AA-4219-9A76-B25ACA83C10E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/johnil/VoiceTexting.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6BDCA0AC-67AA-4219-9A76-B25ACA83C10E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6BDCA0AC-67AA-4219-9A76-B25ACA83C10E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>VoiceTexting</string>
+		</dict>
+	</array>
+</dict>
+</plist>

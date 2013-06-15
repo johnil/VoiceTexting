@@ -28,7 +28,7 @@
         UIImageView *inputBG = [[UIImageView alloc] initWithImage:searchBg];
         [inputBG setFrame:CGRectMake(-2, -3, self.frame.size.width+4, self.frame.size.height+6)];
         [self addSubview:inputBG];
-                        
+        
         
         [self addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         [self addTarget:self action:@selector(closeKeyBoard) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -38,12 +38,19 @@
 
 - (BOOL)resignFirstResponder{
     [voiceInputView hide];
-    voiceInputView.delegate = nil;
-    voiceInputView = nil;
     return [super resignFirstResponder];
 }
 
+- (BOOL)becomeFirstResponder{
+    self.tag = 0;
+    return [super becomeFirstResponder];
+}
+
 - (void)voiceMode{
+    if (self.tag<0) {
+        return;
+    }
+    self.tag = -1;
     [super resignFirstResponder];
     voiceInputView = [[VoiceInputView alloc] init];
     voiceInputView.delegate = self;
@@ -52,6 +59,7 @@
 }
 
 - (void)textMode{
+    self.tag = 0;
     [self voiceInputDidFinished:@""];
     [self resignFirstResponder];
     [super becomeFirstResponder];
@@ -99,26 +107,39 @@
     pA = nil;
     [waitTimer invalidate];
     waitTimer = nil;
-    if ([self.text rangeOfString:BLANK].length>0) {
-        self.text = [NSString stringWithFormat:@"%@%@", str, [self.text stringByReplacingOccurrencesOfString:BLANK withString:@""]];
+    if (str == nil) {
+        self.text = [self.text stringByReplacingOccurrencesOfString:BLANK withString:@""];
+    } else {
+        if ([self.text rangeOfString:BLANK].length>0) {
+            self.text = [NSString stringWithFormat:@"%@%@", str, [self.text stringByReplacingOccurrencesOfString:BLANK withString:@""]];
+        }
     }
+    [self sendActionsForControlEvents:UIControlEventEditingChanged];
 }
 
 
 #pragma mark Target
 
 - (void)textFieldDidChange:(UITextField *)text{
-    if ([self.text stringByTrimmingCharactersInSet:[NSCharacterSet  whitespaceAndNewlineCharacterSet]].length==0
-        && self.text.length < BLANK.length) {
-        if (p1 && p1.superview) {
-            self.text = BLANK;
-            [self voiceInputDidFinished:@""];
+    if (text.markedTextRange == nil) {
+        if ([self.text stringByTrimmingCharactersInSet:[NSCharacterSet  whitespaceAndNewlineCharacterSet]].length==0
+            && self.text.length < BLANK.length) {
+            if (p1 && p1.superview) {
+                self.text = BLANK;
+                [self voiceInputDidFinished:@""];
+            }
         }
     }
 }
 
 - (void)closeKeyBoard{
     [self resignFirstResponder];
+}
+
+- (void)dealloc{
+    voiceInputView.delegate = nil;
+    voiceInputView = nil;
+    NSLog(@"voice textfield dealloc");
 }
 
 @end
